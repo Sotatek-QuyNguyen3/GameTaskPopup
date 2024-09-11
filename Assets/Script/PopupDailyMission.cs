@@ -16,11 +16,7 @@ public class PopupDailyMission : Popups
     private Action<bool> _onResult;
     void InitUI()
     {
-
-        // volumeSlider.value = EazySoundManager.GlobalMusicVolume;
-        // volumeSlider.onValueChanged.AddListener(OnChangeSliderMusic);
-        // sfxSlider.value = EazySoundManager.GlobalSoundsVolume;
-        // sfxSlider.onValueChanged.AddListener(OnChangeSfxVoloume);
+        
     }
 
     
