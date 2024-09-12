@@ -6,7 +6,8 @@ using UnityEngine;
 public class UserData : MonoBehaviour
 {
     public static UserData Instance { get; private set; }
-    private void Awake() {
+    private void Awake()
+    {
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -19,37 +20,50 @@ public class UserData : MonoBehaviour
     public ListDailyQuest listDailyQuest;
     public List<QuestProgress> listQuestInProgress;
     public List<QuestProgress> ListQuestFinished;
+    public Action<QuestProgress> onQuestFinish;
 
-    public void GenerateQuest(){
-        foreach(var item in listDailyQuest.listQuestGroupData){
+    private void Start()
+    {
+        onQuestFinish = OnFinishQuest;
+        listQuestInProgress = new();
+        ListQuestFinished = new();
+        GenerateQuest();
+    }
+    /// <summary>
+    /// Gọi GenerateQuest mỗi khi reset quest hằng ngày.
+    /// </summary>
+    public void GenerateQuest()
+    {
+        foreach (var item in listDailyQuest.listQuestGroupData)
+        {
             QuestProgress newQuestProgress = new(item.listQuest[0]);
             listQuestInProgress.Add(newQuestProgress);
         }
-        foreach(var item in listDailyQuest.listQuestData){
+        foreach (var item in listDailyQuest.listSingleQuestData)
+        {
             QuestProgress newQuestProgress = new(item);
             listQuestInProgress.Add(newQuestProgress);
         }
     }
-    public void OnFinishQuest(QuestProgress finishedQuest){
-        // foreach(var item in listDailyQuest.listQuestData){
-        //     if(item.questID == finishedQuest.GetQuestData().questID){
-        //         ListQuestFinished.Add(finishedQuest);
-        //         listQuestInProgress.Remove(finishedQuest);
-        //     }
-        // }
+    public void OnFinishQuest(QuestProgress finishedQuest)
+    {
+
         ListQuestFinished.Add(finishedQuest);
-        listQuestInProgress.Remove(finishedQuest);
-        foreach(var group in listDailyQuest.listQuestGroupData){
-            if(group.QuestGroupID == finishedQuest.GetQuestData().questGroupID){
-                var quest = group.listQuest.Find(x=>x.questID == finishedQuest.GetQuestData().questID);
+        listQuestInProgress.Remove(listQuestInProgress.Find(x => x.GetQuestData().questID == finishedQuest.GetQuestData().questID));
+        foreach (var group in listDailyQuest.listQuestGroupData)
+        {
+            if (group.QuestGroupID == finishedQuest.GetQuestData().questGroupID)
+            {
+                var quest = group.listQuest.Find(x => x.questID == finishedQuest.GetQuestData().questID);
                 string[] nameComponent = quest.questID.Split("_");
-                string nextQuestName = nameComponent[0]+nameComponent[1]+ (Convert.ToInt16(nameComponent[2])+1).ToString();
-                var nextQuest = group.listQuest.Find(x=>x.questID == nextQuestName);
-                if(nextQuest!=null){
+                string nextQuestName = nameComponent[0] + "_" + nameComponent[1] + "_" + (Convert.ToInt16(nameComponent[2]) + 1).ToString();
+                var nextQuest = group.listQuest.Find(x => x.questID == nextQuestName);
+                if (nextQuest != null)
+                {
                     QuestProgress newQuestProgress = new(nextQuest);
                     listQuestInProgress.Add(newQuestProgress);
-                    
                 }
+                // Debug.LogError("Next quest not found: " + nextQuestName);
             }
         }
     }

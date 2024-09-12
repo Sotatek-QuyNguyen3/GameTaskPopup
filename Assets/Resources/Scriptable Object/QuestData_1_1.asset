@@ -10,5 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94ebb1d8bda45ec4d993703b9245dbde, type: 3}
-  m_Name: Quest Data
+  m_Name: QuestData_1_1
   m_EditorClassIdentifier: 
+  questGroupID: QuestGroup_1
+  questID: QuestData_1_1
+  title: QuestData_1_1
+  description: QuestData_1_1
+  questIcon: {fileID: 0}
+  rewardType: 1
+  rewardAmount: 150
+  questType: 1
+  requestAmount: 15000

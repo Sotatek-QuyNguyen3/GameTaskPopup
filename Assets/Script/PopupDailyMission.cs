@@ -10,18 +10,21 @@ using System.Linq;
 public class PopupDailyMission : Popups
 {
     public static PopupDailyMission Instance;
-
+    public QuestItem questItem;
+    public Transform scrollHolder;
 
 
     private Action<bool> _onResult;
     void InitUI()
     {
-        
+
+        foreach(var item in UserData.Instance.listQuestInProgress){
+            Instantiate(questItem,scrollHolder);
+            questItem.Init(item,UserData.Instance.onQuestFinish);
+        }
     }
 
     
-
-
     #region BASE POPUP 
     static void CheckInstance(Action completed)//
     {
@@ -81,7 +84,12 @@ public class PopupDailyMission : Popups
     public void Disappear()
     {
         //Background.gameObject.SetActive(false);
-        base.Disappear(()=>{
+        base.Disappear(() =>
+        {
+            foreach (Transform item in scrollHolder)
+            {
+                Destroy(item.gameObject);
+            }
             Panel.gameObject.SetActive(false);
         });
     }

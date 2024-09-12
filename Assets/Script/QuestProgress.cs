@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
-public class QuestProgress : MonoBehaviour
+[Serializable]
+public class QuestProgress
 {
     [SerializeField] private QuestData questData;
     [SerializeField] private int currentProgress;

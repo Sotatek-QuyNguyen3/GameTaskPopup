@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,19 +11,33 @@ public class QuestItem : MonoBehaviour
     [SerializeField] private QuestProgress questProgress;
     [SerializeField] private TextMeshProUGUI questTitle;
     [SerializeField] private TextMeshProUGUI questDescription;
-    [SerializeField] private Sprite questIcon;
+    [SerializeField] private Image questIcon;
     [SerializeField] private SpriteAtlas iconAtlas;
     [SerializeField] private RewardType rewardType;
     [SerializeField] private TextMeshProUGUI rewardAmount;
-    [SerializeField] private Sprite rewardIcon;
+    [SerializeField] private Image rewardIcon;
     [SerializeField] private Slider questProgressBar;
     [SerializeField] private TextMeshProUGUI questProgressText;
     [SerializeField] private Button collectReward;
     [SerializeField] private Image finishedBackground;
+    private Action<QuestProgress> onFinish;
 
-    public void Init(QuestProgress newQuestProgress)
+    public void Init(QuestProgress newQuestProgress, Action<QuestProgress> onFinish)
     {
         questProgress = newQuestProgress;
+        questTitle.text = questProgress.GetQuestData().title;
+        questDescription.text = questProgress.GetQuestData().description;
+        questIcon = questProgress.GetQuestData().questIcon;
+        rewardAmount.text = questProgress.GetQuestData().rewardAmount.ToString();
+        collectReward.enabled = false;
+        // this.onFinish += onFinish;
+        UpdateProgress();
+        if (questProgress.QuestStatus == QuestStatus.Finined)
+            finishedBackground.gameObject.SetActive(true);
+        else
+
+            finishedBackground.gameObject.SetActive(false);
+
     }
     public void UpdateProgress()
     {
@@ -31,8 +46,15 @@ public class QuestItem : MonoBehaviour
         if (questProgress.QuestStatus == QuestStatus.Finined)
         {
             collectReward.interactable = true;
+            collectReward.enabled = true;
             finishedBackground.gameObject.SetActive(true);
         }
+    }
+    public void OnRewardClaim()
+    {
+        
+        UserData.Instance.onQuestFinish?.Invoke(questProgress);
+        Destroy(gameObject);
     }
 
 }

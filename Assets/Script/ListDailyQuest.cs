@@ -5,5 +5,5 @@ using UnityEngine;
 public class ListDailyQuest : ScriptableObject
 {
     public List<QuestGroupData> listQuestGroupData;
-    public List<QuestData> listQuestData;
+    public List<QuestData> listSingleQuestData;
 }

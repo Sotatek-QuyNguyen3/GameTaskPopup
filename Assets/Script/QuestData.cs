@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName ="QuestData_0_0",menuName ="Scriptable Object/Quest Data")]
 public class QuestData : ScriptableObject
@@ -9,7 +10,7 @@ public class QuestData : ScriptableObject
     public string questID;
     public string title;
     public string description;
-    public Sprite questIcon;
+    public Image questIcon;
     public RewardType rewardType = RewardType.Unknown;
     public int rewardAmount = 100;
     public QuestType questType = QuestType.Unknown;
