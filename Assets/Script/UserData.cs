@@ -17,10 +17,13 @@ public class UserData : MonoBehaviour
             Instance = this;
         }
     }
+    public int bigRewardRequire = 5;
+    public int questsFinished = 0;
     public ListDailyQuest listDailyQuest;
     public List<QuestProgress> listQuestInProgress;
     public List<QuestProgress> ListQuestFinished;
     public Action<QuestProgress> onQuestFinish;
+    public Action<QuestProgress> onCreateNewQuest;
 
     private void Start()
     {
@@ -50,6 +53,7 @@ public class UserData : MonoBehaviour
 
         ListQuestFinished.Add(finishedQuest);
         listQuestInProgress.Remove(listQuestInProgress.Find(x => x.GetQuestData().questID == finishedQuest.GetQuestData().questID));
+        questsFinished = ListQuestFinished.Count;
         foreach (var group in listDailyQuest.listQuestGroupData)
         {
             if (group.QuestGroupID == finishedQuest.GetQuestData().questGroupID)
@@ -62,6 +66,7 @@ public class UserData : MonoBehaviour
                 {
                     QuestProgress newQuestProgress = new(nextQuest);
                     listQuestInProgress.Add(newQuestProgress);
+                    // onCreateNewQuest?.Invoke(newQuestProgress);
                 }
                 // Debug.LogError("Next quest not found: " + nextQuestName);
             }

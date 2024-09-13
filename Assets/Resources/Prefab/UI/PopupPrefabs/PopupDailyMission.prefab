@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8117595609275603696}
   - component: {fileID: 1725466282872419599}
+  - component: {fileID: 5400842674247555000}
+  - component: {fileID: 7073036664108027069}
   m_Layer: 5
   m_Name: Big Reward
   m_TagString: Untagged
@@ -38,7 +40,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.091368034, y: 0}
   m_AnchorMax: {x: 0.46455836, y: 1}
-  m_AnchoredPosition: {x: -1.4611206, y: -11.856995}
+  m_AnchoredPosition: {x: -1.4610596, y: -11.856995}
   m_SizeDelta: {x: 1.3530273, y: -24.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1725466282872419599
@@ -49,6 +51,92 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172984916135283820}
   m_CullTransparentMesh: 1
+--- !u!114 &5400842674247555000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172984916135283820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7073036664108027069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172984916135283820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 5400842674247555000}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4116421663238614245}
+        m_TargetAssemblyTypeName: PopupDailyMission, Assembly-CSharp
+        m_MethodName: OnBigRewardClaim
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &455649523645470124
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +883,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -30.623291}
+  m_AnchoredPosition: {x: 0, y: -30.623535}
   m_SizeDelta: {x: -85.79462, y: -587.0485}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4366881729110554484
@@ -2184,6 +2272,10 @@ MonoBehaviour:
   _isAnimateAppear: 0
   questItem: {fileID: -6824195045528429348, guid: 91220438c62ee7e47a6c63bb05db0229, type: 3}
   scrollHolder: {fileID: 5851977259151322265}
+  bigRewardProgressText: {fileID: 975474053036838913}
+  bigRewardProgressBar: {fileID: 677546064348125698}
+  bigRewardTimeCountdown: {fileID: 5127299482318309520}
+  bigRewardClaimButton: {fileID: 7073036664108027069}
 --- !u!1 &6986331228582363989
 GameObject:
   m_ObjectHideFlags: 0
@@ -2692,6 +2784,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2343635303756759865, guid: dc049af0f0db3054398ef73a52fa7723, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2623618438111463738, guid: dc049af0f0db3054398ef73a52fa7723, type: 3}
       propertyPath: m_fontSize
       value: 18
@@ -2789,6 +2885,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc049af0f0db3054398ef73a52fa7723, type: 3}
+--- !u!114 &677546064348125698 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2343635303756759865, guid: dc049af0f0db3054398ef73a52fa7723, type: 3}
+  m_PrefabInstance: {fileID: 3017802532351351099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &975474053036838913 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2623618438111463738, guid: dc049af0f0db3054398ef73a52fa7723, type: 3}
+  m_PrefabInstance: {fileID: 3017802532351351099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1666626933870681624 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4521736311004350243, guid: dc049af0f0db3054398ef73a52fa7723, type: 3}

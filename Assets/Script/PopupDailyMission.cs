@@ -10,21 +10,67 @@ using System.Linq;
 public class PopupDailyMission : Popups
 {
     public static PopupDailyMission Instance;
-    public QuestItem questItem;
-    public Transform scrollHolder;
-
-
+    [SerializeField] private QuestItem questItem;
+    [SerializeField] private Transform scrollHolder;
+    [SerializeField] private TextMeshProUGUI bigRewardProgressText;
+    [SerializeField] private Slider bigRewardProgressBar;
+    [SerializeField] private TextMeshProUGUI bigRewardTimeCountdown;
+    [SerializeField] private Button bigRewardClaimButton;
+    private Action<QuestProgress> onQuestFinish;
+    // private Action<QuestProgress> onQuestCreate;
+    
     private Action<bool> _onResult;
+    private void Start()
+    {
+        onQuestFinish = (questProgress) =>
+        {
+
+            UserData.Instance.onQuestFinish?.Invoke(questProgress);
+            UpdateBigReward();
+            // dùng tạm --------------------------
+            foreach (Transform item in scrollHolder)
+            {
+                Destroy(item.gameObject);
+            }
+            foreach (var item in UserData.Instance.listQuestInProgress)
+            {
+                var newQuestItem = Instantiate(questItem, scrollHolder);
+                newQuestItem.Init(item, onQuestFinish);
+            }
+            // -----------------------------------
+        };
+        // onQuestCreate = UserData.Instance.onCreateNewQuest;
+    }
     void InitUI()
     {
-
-        foreach(var item in UserData.Instance.listQuestInProgress){
-            Instantiate(questItem,scrollHolder);
-            questItem.Init(item,UserData.Instance.onQuestFinish);
+        UpdateBigReward();
+        foreach (var item in UserData.Instance.listQuestInProgress)
+        {
+            var newQuestItem = Instantiate(questItem, scrollHolder);
+            newQuestItem.Init(item, onQuestFinish);
         }
     }
+    public void OnNewQuestCreate(QuestProgress questProgress){
+        var newQuestItem = Instantiate(questItem, scrollHolder);
+        newQuestItem.Init(questProgress, onQuestFinish);
+    }
+    public void UpdateTimeCountdown(int hour, int minute, int second){
+        bigRewardTimeCountdown.text = $"Reset in {hour}h {minute}m {second}s";
+    }
+    public void UpdateBigReward()
+    {   
+        bigRewardProgressText.text = $"{UserData.Instance.questsFinished}/{UserData.Instance.bigRewardRequire}";
+        bigRewardProgressBar.value = (float)UserData.Instance.questsFinished / UserData.Instance.bigRewardRequire;
+        if(bigRewardProgressBar.value>=1){
+            bigRewardClaimButton.enabled = true;
+        }
+        else    
+        bigRewardClaimButton.enabled = false;
+    }
+    public void OnBigRewardClaim(){
+        Debug.Log("Big reward claimed");
+    }
 
-    
     #region BASE POPUP 
     static void CheckInstance(Action completed)//
     {
@@ -50,7 +96,7 @@ public class PopupDailyMission : Popups
             };
 
         }
-        else        
+        else
         {
             if (completed != null)
             {

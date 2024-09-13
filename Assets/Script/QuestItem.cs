@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using TMPro;
 using UnityEngine;
 using UnityEngine.U2D;
@@ -22,7 +23,10 @@ public class QuestItem : MonoBehaviour
     [SerializeField] private Image finishedBackground;
     private Action<QuestProgress> onFinish;
 
-    public void Init(QuestProgress newQuestProgress, Action<QuestProgress> onFinish)
+    private void Start() {
+
+    }
+    public void Init(QuestProgress newQuestProgress, Action<QuestProgress> onFinishCallBack)
     {
         questProgress = newQuestProgress;
         questTitle.text = questProgress.GetQuestData().title;
@@ -30,14 +34,13 @@ public class QuestItem : MonoBehaviour
         questIcon = questProgress.GetQuestData().questIcon;
         rewardAmount.text = questProgress.GetQuestData().rewardAmount.ToString();
         collectReward.enabled = false;
-        // this.onFinish += onFinish;
+        onFinish = onFinishCallBack;
         UpdateProgress();
         if (questProgress.QuestStatus == QuestStatus.Finined)
             finishedBackground.gameObject.SetActive(true);
         else
 
             finishedBackground.gameObject.SetActive(false);
-
     }
     public void UpdateProgress()
     {
@@ -52,8 +55,8 @@ public class QuestItem : MonoBehaviour
     }
     public void OnRewardClaim()
     {
-        
-        UserData.Instance.onQuestFinish?.Invoke(questProgress);
+        onFinish?.Invoke(questProgress);
+        // UserData.Instance.onQuestFinish?.Invoke(questProgress);
         Destroy(gameObject);
     }
 

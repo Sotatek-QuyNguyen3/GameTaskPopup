@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listQuestGroupData:
   - {fileID: 11400000, guid: a4d35070d4922ea43b225f60480daae3, type: 2}
+  - {fileID: 11400000, guid: 655a1a447fd8fbb4b9407341b0b253c2, type: 2}
   listSingleQuestData:
   - {fileID: 11400000, guid: 5816c078377a38747a29eea5d9f2023a, type: 2}
   - {fileID: 11400000, guid: 0fc4d50bae1cf8344a0eeb9f906ee3e6, type: 2}
